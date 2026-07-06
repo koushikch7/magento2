@@ -348,10 +348,29 @@ Added to `app/code/Magento/Deploy/Test/Unit/Process/QueueTest.php`:
 #### SVC
 No `@api` class/interface changes → **no SVC violations expected**.
 
-#### CI Status (opened 2026-07-05 Session 9)
+#### Live Test Verification (2026-07-06 Session 10)
+Server: `192.168.29.20` — Magento 2.4.9, Docker Compose, webroot `/mnt/ssd/magento`, source `/mnt/ssd/magento2-src`.
+
+- Added `pcntl` to `Dockerfile` `docker-php-ext-install` list → rebuilt `magento_php:local` → `pcntl_fork` confirmed available.
+- Injected `throw new \RuntimeException("FORCED FAILURE")` at top of `vendor/magento/module-deploy/Process/DeployPackage.php::deploy()`.
+- **Without fix:** `bin/magento setup:static-content:deploy -f --jobs 2` — error in output, `echo $?` = **0** (bug confirmed).
+- **With fix (Queue.php from PR #40933):** same command — error + `Static content deploy failed: ...` message, `echo $?` = **1** (fix confirmed).
+- Restored all vendor files; branch switched back to `2.4-develop` on server.
+
+#### CI Status (checked 2026-07-06 Session 10)
 | Check | Result |
 |-------|--------|
-| All checks | PENDING — CI triggered 2026-07-05 |
+| Unit Tests | **PASSED** |
+| Static Tests | **PASSED** |
+| Integration Tests | **PASSED** |
+| SVC | **PASSED** (no @api changes) |
+| Database Compare | **PASSED** |
+| Magento Health Index | **PASSED** |
+| Functional Tests EE | FAILED — pre-existing (`MC-32333: Admin Reports Review by Products`, 1 of 3812) |
+| WebAPI Tests | FAILED — pre-existing (`testCreateDownloadableProduct` — downloadable domain missing from CI env.php) |
+| Functional Tests CE | FAILED — pre-existing infrastructure issue |
+| Functional Tests B2B | FAILED — pre-existing infrastructure issue |
+- **PR is effectively clean. Ready for maintainer review.**
 
 ---
 
@@ -667,21 +686,28 @@ When a PR adds public methods to `@api` classes/interfaces:
 
 ---
 
-## 9. Next Steps (as of 2026-07-05 Session 9)
+## 9. Next Steps (as of 2026-07-06 Session 10)
 
 ### Immediate
 
-1. **PR #40933** — CI triggered 2026-07-05. When results arrive:
-   - Fetch check-runs for head SHA (reports expire ~24h).
-   - SVC should PASS (no @api changes).
-   - If Unit/Static/Integration PASS: add reviewer comment tagging @engcom-Hotel.
-   - If any unexpected failure: diagnose from console-error-logs.html.
+1. **PR #40933** — CI CLEAN (Unit/Static/Integration/SVC/DB/Health PASS). Only pre-existing failures remain.
+   - Tag `@engcom-Hotel` for review if not already done.
+   - Fix confirmed on live Magento 2.4.9 Docker instance 2026-07-06.
+   - Test guide at `.project/session-notes/pr40933-test-guide.md`.
 
-2. **PR #40391** — Integration test fix committed 2026-07-05; new CI run in progress. When results arrive: verify Unit+Integration PASS, add CI comment for reviewers.
+2. **PR #40391** — Integration test fix committed 2026-07-05; new CI run triggered. Check results at next session start.
 
 3. **PR #40918** — WebAPI re-run triggered; CI comment added. Check if WebAPI PASS now.
 
 4. **PR #40392** — SVC MINOR inherent; awaiting engcom-Charlie to raise internal JIRA. No code action needed.
+
+### Server Setup Note
+Home server (`192.168.29.20`) runs Magento 2.4.9 with Docker Compose:
+- PHP container: `magento_php:local` — built from `/var/www/html/docker-containers/magento/Dockerfile`
+- `pcntl` extension now included in Dockerfile (added 2026-07-06). Rebuild if container is recreated: `docker compose build php && docker compose up -d php`
+- Magento source: `/mnt/ssd/magento2-src` (koushikch7 fork, branch `2.4-develop`)
+- Magento webroot: `/mnt/ssd/magento`
+- To sync new `.project/session-notes/` files: `ssh chk@192.168.29.20 -p22` then `cd /mnt/ssd/magento2-src && git pull origin 2.4-develop`
 
 ### Rebase Status
 - PR #40392: Up to date (0 behind).

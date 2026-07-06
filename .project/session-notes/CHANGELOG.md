@@ -5,6 +5,27 @@ Format: `[YYYY-MM-DD] Branch — Description`
 
 ---
 
+## Session 10 — 2026-07-06 (PR #40933 CI analysis + live server test)
+
+### PR #40933 — CI analysis
+**[2026-07-06]** Analysed failing checks:
+- WebAPI CE SOAP: 1 broken — `Magento\Downloadable\Api\ProductRepositoryTest::testCreateDownloadableProduct` — pre-existing (downloadable domain missing from CI env.php). Same failure as PR #40392.
+- Functional EE: 1 broken out of 3812 — `MC-32333: Admin Reports Review by Products` — pre-existing infrastructure issue.
+- Functional CE/B2B: pre-existing on all PRs, never a blocker.
+- Re-runs triggered; reviewer comment posted. **No code changes needed.**
+
+### PR #40933 — Live test on home Magento 2.4.9 Docker instance (`192.168.29.20`)
+**[2026-07-06]**
+- Added `pcntl` to Dockerfile `docker-php-ext-install` list; rebuilt `magento_php:local` container. `pcntl_fork` confirmed available.
+- Checked out `fix/issue-22883-parallel-deploy-exit-code` branch in `/mnt/ssd/magento2-src`.
+- Injected `throw new \RuntimeException(...)` at top of `DeployPackage::deploy()` to force child failure.
+- **Without fix** (original `vendor/magento/module-deploy/Process/Queue.php`): error visible, `EXIT CODE: 0` — bug confirmed.
+- **With fix** (PR #40933 Queue.php): error + `Static content deploy failed: ...`, `EXIT CODE: 1` — fix confirmed.
+- All vendor files restored; magento2-src switched back to `2.4-develop`.
+- Created `pr40933-test-guide.md` with full reproducible steps.
+
+---
+
 ## Session 9 — 2026-07-05 (New PR #40933 opened for issue #22883)
 
 ### New PR — Parallel static content deploy ignoring child failure exit codes

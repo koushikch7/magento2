@@ -27,7 +27,7 @@ This fork is used to contribute confirmed upstream bug fixes to `magento/magento
 | [#40918](https://github.com/magento/magento2/pull/40918) | [#26209](https://github.com/magento/magento2/issues/26209) | `fix/26209-billing-address-overwrites-shipping-totals` | **CLEAN** — Unit/Integration/Static/SVC/DB/Health/FunctionalEE PASS; WebAPI FAIL (pre-existing); rebased 2026-07-05 |
 | [#40391](https://github.com/magento/magento2/pull/40391) | [#2703](https://github.com/magento/magento2/issues/2703) | `fix/issue-2703-configurable-product-type` | Unit Tests PASSED; **Integration test fix committed** (2026-07-05); rebased; new CI run in progress |
 | [#40392](https://github.com/magento/magento2/pull/40392) | [#40157](https://github.com/magento/magento2/issues/40157) | `fix/issue-40157-curl-methods` | **CLEAN** — Unit/Integration/Static/DB/Health/FunctionalEE PASS; SVC MINOR (expected); clean-rebased 2026-07-05 |
-| [#40933](https://github.com/magento/magento2/pull/40933) | [#22883](https://github.com/magento/magento2/issues/22883) | `fix/issue-22883-parallel-deploy-exit-code` | **NEW** — CI triggered 2026-07-05; awaiting results |
+| [#40933](https://github.com/magento/magento2/pull/40933) | [#22883](https://github.com/magento/magento2/issues/22883) | `fix/issue-22883-parallel-deploy-exit-code` | **VERIFIED** — CI pre-existing failures only (no code action needed); fix confirmed on live Magento 2.4.9 Docker 2026-07-06 |
 
 ---
 
