@@ -5,6 +5,31 @@ Format: `[YYYY-MM-DD] Branch — Description`
 
 ---
 
+## Session 11 — 2026-07-07 (All PRs CI sweep + review readiness)
+
+### All PRs — CI status sweep
+**[2026-07-07]** Checked all 4 PRs against latest check-runs:
+
+**PR #40918** — WebAPI now **PASSES** (previously failing on `AsyncOrderProcessingTest`). All code-relevant checks fully green. Only Functional CE/B2B remain — universally pre-existing. Previous CI note was outdated; posted update comment noting WebAPI now passes.
+
+**PR #40391** — All code-relevant checks PASS (Unit/Static/Integration/SVC/DB/Health/WebAPI). No CI status note existed. Posted full CI status note for reviewers.
+
+**PR #40392** — SVC MINOR only (expected, already documented). WebAPI/Functional EE PASS. Existing CI note + reviewer tags sufficient. No action taken.
+
+**PR #40933** — WebAPI report expired (>24h). Triggered re-run `@magento run WebAPI Tests`. Awaiting results. All other checks PASS.
+
+### Contribution review process analysis
+**[2026-07-07]** Read `CONTRIBUTING.md` and `PULL_REQUEST_TEMPLATE.md`:
+- Review is FIFO by maintainers — not automatic assignment.
+- Required actions: CI clean, complete PR template (including Contribution Checklist), tag reviewer.
+- PR #40933 body is missing the Contribution Checklist section (required `(*)`).
+- PRs #40918/#40391/#40392 already have reviewer tags (@engcom-Hotel, @bgorski, @engcom-Charlie).
+
+### Decision
+**[2026-07-07]** All PRs parked pending maintainer review comments. Moving to next upstream issues.
+
+---
+
 ## Session 10 — 2026-07-06 (PR #40933 CI analysis + live server test)
 
 ### PR #40933 — CI analysis

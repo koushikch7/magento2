@@ -154,7 +154,7 @@ foreach ($quote->getAllAddresses() as $address) {
 New unit test added: `testCollectSetsZeroShippingAmountForVirtualOnlyQuote`.
 Commit: `6178479c045` — `Initialize shipping amount to zero before address loop`.
 
-#### CI Status (last checked 2026-07-05 Session 6)
+#### CI Status (last checked 2026-07-07 Session 11)
 | Check | Result |
 |-------|--------|
 | Unit Tests | **PASSED** |
@@ -164,10 +164,10 @@ Commit: `6178479c045` — `Initialize shipping amount to zero before address loo
 | Magento Health Index | **PASSED** |
 | Database Compare | **PASSED** |
 | Functional Tests EE | **PASSED** |
-| WebAPI Tests | FAILED — **pre-existing** (`AsyncOrderProcessingTest::testAsyncOrderProcessingWithCustomerDeletion` — async queue not processed in CI env; unrelated to TotalsCollector) |
+| WebAPI Tests | **PASSED** *(previously failing on `AsyncOrderProcessingTest` — that cleared)* |
 | Functional Tests CE | FAILED — pre-existing infrastructure issue |
 | Functional Tests B2B | FAILED — pre-existing infrastructure issue |
-- **PR is effectively clean. Ready for maintainer review.**
+- **PR is fully clean. CI update comment posted 2026-07-07. Awaiting maintainer review.**
 
 ---
 
@@ -306,13 +306,20 @@ private function isAttributeValuable(
 Commit: `8b08a7cd09a` — `Remove strict Product type hint from private isAttributeValuable parameter`.
 New `@magento run Unit Tests` triggered 2026-07-04.
 
-#### CI Status (last checked 2026-07-05 Session 8)
+#### CI Status (last checked 2026-07-07 Session 11)
 | Check | Result |
 |-------|--------|
-| Unit Tests | **PASSED** (job 234 — TypeError fix confirmed) |
-| Integration Tests | **FAILED** — code-related (fixed in Session 8; re-run triggered) |
-| Functional Tests CE/EE/B2B | FAILED — pre-existing infrastructure issue |
-- Session 8: Integration test fix committed + branch rebased. New CI run in progress.
+| Unit Tests | **PASSED** |
+| Static Tests | **PASSED** |
+| Integration Tests | **PASSED** |
+| SVC | **PASSED** |
+| Database Compare | **PASSED** |
+| Magento Health Index | **PASSED** |
+| WebAPI Tests | **PASSED** |
+| Functional Tests EE | FAILED — pre-existing infrastructure issue |
+| Functional Tests CE | FAILED — pre-existing infrastructure issue |
+| Functional Tests B2B | FAILED — pre-existing infrastructure issue |
+- **PR is fully clean. CI status note posted 2026-07-07. Awaiting maintainer review.**
 
 **Integration test fix (Session 8):**
 - Failure: `ProductTest::testSaveExistProduct['delete_all_options']` at line 368 (`assertNull($options)` failed)
@@ -686,20 +693,22 @@ When a PR adds public methods to `@api` classes/interfaces:
 
 ---
 
-## 9. Next Steps (as of 2026-07-06 Session 10)
+## 9. Next Steps (as of 2026-07-07 Session 11)
 
-### Immediate
+### All PRs — parked, awaiting maintainer review
 
-1. **PR #40933** — CI CLEAN (Unit/Static/Integration/SVC/DB/Health PASS). Only pre-existing failures remain.
-   - Tag `@engcom-Hotel` for review if not already done.
-   - Fix confirmed on live Magento 2.4.9 Docker instance 2026-07-06.
-   - Test guide at `.project/session-notes/pr40933-test-guide.md`.
+| PR | Status | Next action |
+|----|--------|-------------|
+| #40918 | Fully clean (all checks PASS) | Wait for @engcom-Hotel / @bgorski review |
+| #40391 | Fully clean (all checks PASS) | Wait for @engcom-Hotel review |
+| #40392 | Clean — SVC MINOR only (expected) | Wait for @engcom-Charlie to raise internal JIRA |
+| #40933 | WebAPI re-run in progress | Check WebAPI result; if pre-existing → post CI note + tag @engcom-Hotel; if new failure → diagnose |
 
-2. **PR #40391** — Integration test fix committed 2026-07-05; new CI run triggered. Check results at next session start.
+- Check activity every 7–10 days. Magento auto-closes inactive PRs after ~2 weeks.
+- PR #40933 body needs **Contribution Checklist** added (required `(*)` section missing from original PR body).
 
-3. **PR #40918** — WebAPI re-run triggered; CI comment added. Check if WebAPI PASS now.
-
-4. **PR #40392** — SVC MINOR inherent; awaiting engcom-Charlie to raise internal JIRA. No code action needed.
+### Next upstream issues
+- Moving to find and work on new P1/P2 issues after docs update (decided 2026-07-07).
 
 ### Server Setup Note
 Home server (`192.168.29.20`) runs Magento 2.4.9 with Docker Compose:
