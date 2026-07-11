@@ -634,6 +634,14 @@ app/code/Magento/Deploy/Process/Queue.php
 app/code/Magento/Deploy/Test/Unit/Process/QueueTest.php
 ```
 
+### PR #40978
+```
+app/code/Magento/CatalogImportExport/Model/Export/Product.php   (mediaGalery → mediaGallery, 6 lines)
+```
+Lesson: always open PRs from a dedicated feature branch (never the default `2.4-develop`) and verify the
+diff both before and after committing — the prior attempt #40390 was opened from `2.4-develop`, lost its
+changes to a conflict, and was closed for having 0 files changed.
+
 ---
 
 ## 7. Decision Log
@@ -693,22 +701,30 @@ When a PR adds public methods to `@api` classes/interfaces:
 
 ---
 
-## 9. Next Steps (as of 2026-07-07 Session 11)
+## 9. Next Steps (as of 2026-07-11 Session 12)
 
 ### All PRs — parked, awaiting maintainer review
 
 | PR | Status | Next action |
 |----|--------|-------------|
-| #40918 | Fully clean (all checks PASS) | Wait for @engcom-Hotel / @bgorski review |
-| #40391 | Fully clean (all checks PASS) | Wait for @engcom-Hotel review |
-| #40392 | Clean — SVC MINOR only (expected) | Wait for @engcom-Charlie to raise internal JIRA |
-| #40933 | WebAPI re-run in progress | Check WebAPI result; if pre-existing → post CI note + tag @engcom-Hotel; if new failure → diagnose |
+| #40918 | Fully clean; issue assigned to you | Wait for @engcom-Hotel / @bgorski review |
+| #40391 | Fully clean; you co-assignee | Wait for @engcom-Hotel review |
+| #40392 | Clean — SVC MINOR only; you sole assignee | Wait for @engcom-Charlie internal JIRA; ⚠️ competes with #39471 |
+| #40933 | Fully clean — WebAPI now PASSES; checklist added | Wait for @engcom-Hotel review |
+| #40978 | NEW — mediaGallery typo; CI running | Check CI result; ⚠️ competes with stale #40360 |
 
 - Check activity every 7–10 days. Magento auto-closes inactive PRs after ~2 weeks.
-- PR #40933 body needs **Contribution Checklist** added (required `(*)` section missing from original PR body).
+
+### chk-doc cleanup / fork-recreation plan (decided 2026-07-11)
+- Old `chk-doc/` commits (8, Sessions 3–7) are dangling on the fork — accessible by SHA, no refs point to them, **no secrets**. Purged locally already.
+- **Dangling objects cannot be removed via git** — only GitHub Support GC or fork recreation removes them.
+- **PLAN: after all PRs are merged/closed, delete & re-create the fork** — a fresh fork has a new object store, so all dangling commits vanish automatically. Cleanest path; avoids sacrificing open PRs.
+- Backup option: GitHub Support GC request — draft at `.project/session-notes/github-gc-request.md`.
+- **NO destructive action (branch deletion / force-push / GC) until PRs land.**
+- Stale remote branches NOT tied to the 5 PRs (kept for now): `testing`, `fix/issue-30675…`, `fix/issue-33160…`, `fix/issue-37794…`, `fix/issue-37815…`, `fix/issue-37985…`, `fix/issue-38865…`, `fix/issue-38958…`, 2× dependabot.
 
 ### Next upstream issues
-- Moving to find and work on new P1/P2 issues after docs update (decided 2026-07-07).
+- After #40978, continue finding P1/P2 unassigned bugs with a clear root cause and no competing PR.
 
 ### Server Setup Note
 Home server (`192.168.29.20`) runs Magento 2.4.9 with Docker Compose:

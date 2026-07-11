@@ -22,12 +22,13 @@ This fork is used to contribute confirmed upstream bug fixes to `magento/magento
 
 ## Active PRs
 
-| PR | Issue | Branch | Status (as of 2026-07-07) |
+| PR | Issue | Branch | Status (as of 2026-07-11) |
 |----|-------|--------|--------------------------|
-| [#40918](https://github.com/magento/magento2/pull/40918) | [#26209](https://github.com/magento/magento2/issues/26209) | `fix/26209-billing-address-overwrites-shipping-totals` | **FULLY CLEAN** — All checks PASS incl. WebAPI (2026-07-07); only Functional CE/B2B pre-existing; awaiting maintainer review |
-| [#40391](https://github.com/magento/magento2/pull/40391) | [#2703](https://github.com/magento/magento2/issues/2703) | `fix/issue-2703-configurable-product-type` | **FULLY CLEAN** — All checks PASS (2026-07-07); only Functional CE/B2B/EE pre-existing; awaiting maintainer review |
-| [#40392](https://github.com/magento/magento2/pull/40392) | [#40157](https://github.com/magento/magento2/issues/40157) | `fix/issue-40157-curl-methods` | **CLEAN** — Unit/Integration/Static/DB/Health/WebAPI/FunctionalEE PASS; SVC MINOR (expected, engcom-Charlie tagged); awaiting internal JIRA |
-| [#40933](https://github.com/magento/magento2/pull/40933) | [#22883](https://github.com/magento/magento2/issues/22883) | `fix/issue-22883-parallel-deploy-exit-code` | **PENDING** — WebAPI re-run triggered 2026-07-07 (reports expired); all other checks PASS; awaiting WebAPI result |
+| [#40918](https://github.com/magento/magento2/pull/40918) | [#26209](https://github.com/magento/magento2/issues/26209) | `fix/26209-billing-address-overwrites-shipping-totals` | **FULLY CLEAN** — all checks PASS incl. WebAPI; only CE/B2B pre-existing; pending review; issue assigned to you |
+| [#40391](https://github.com/magento/magento2/pull/40391) | [#2703](https://github.com/magento/magento2/issues/2703) | `fix/issue-2703-configurable-product-type` | **FULLY CLEAN** — all checks PASS; only CE/EE/B2B pre-existing; pending review; you now co-assignee (was SergeyP18) |
+| [#40392](https://github.com/magento/magento2/pull/40392) | [#40157](https://github.com/magento/magento2/issues/40157) | `fix/issue-40157-curl-methods` | **CLEAN** — SVC MINOR (expected); pending review; you now sole assignee; ⚠️ competes with lbajsarowicz #39471 (pending approval) |
+| [#40933](https://github.com/magento/magento2/pull/40933) | [#22883](https://github.com/magento/magento2/issues/22883) | `fix/issue-22883-parallel-deploy-exit-code` | **FULLY CLEAN** — WebAPI now PASSES; all checks green; checklist added; pending review; issue assigned to you |
+| [#40978](https://github.com/magento/magento2/pull/40978) | [#40368](https://github.com/magento/magento2/issues/40368) | `fix/issue-40368-mediagallery-typo` | **NEW** (2026-07-10) — `mediaGalery`→`mediaGallery` typo, 1 file/6 lines; CI running; issue claimed; ⚠️ competes with stale #40360 |
 
 ---
 
