@@ -701,7 +701,7 @@ When a PR adds public methods to `@api` classes/interfaces:
 
 ---
 
-## 9. Next Steps (as of 2026-07-14 Session 13)
+## 9. Next Steps (as of 2026-07-15 Session 13)
 
 ### All PRs — parked, awaiting maintainer review
 
@@ -711,7 +711,7 @@ When a PR adds public methods to `@api` classes/interfaces:
 | #40391 | Fully clean; pending review | Wait for reviewer (none assigned yet) |
 | #40392 | Clean — SVC MINOR only | Wait for @engcom-Charlie internal JIRA; ⚠️ competes with #39471 |
 | #40933 | **✅ APPROVED (ihor-sviziev 2026-07-13); `ready for testing`** | Nothing — in Magento QA/merge stage. First PR to clear review. |
-| #40978 | Fully clean (DB Compare re-run cleared); CI note posted | Still unlabeled — nudge if not triaged by ~2026-07-18; ⚠️ competes with stale #40360 |
+| #40978 | Fully clean (DB Compare re-run cleared); CI note posted; triaged 2026-07-15 (pending review, P4) | Wait for reviewer; ⚠️ competes with stale #40360 |
 
 - Check activity every 7–10 days. Magento auto-closes inactive PRs after ~2 weeks.
 - **DB Compare spurious-fail pattern:** if DB Compare fails but all 10 sub-reports show "Overall Status: Success", it's a harness failure — just re-run `@magento run Database Compare`.
