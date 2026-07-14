@@ -5,6 +5,35 @@ Format: `[YYYY-MM-DD] Branch — Description`
 
 ---
 
+## Session 13 — 2026-07-11/14 (PR #40978 CI cleared; first PR approval)
+
+### PR #40978 — CI made fully clean
+**[2026-07-11]** Reviewed CI after `@magento run all tests`:
+- Unit / Static / Integration / WebAPI / SVC / Health — all PASS.
+- **Database Compare — spurious FAILURE.** Pulled all 10 sub-reports (CE/EE/B2B × standard/MySQL8-upgrade/Sample-Data) — every one reported "Overall Status: Success". A typo-only PHP array-key rename cannot affect DB schema, so this was a harness-level failure, not our code.
+- Re-triggered `@magento run Database Compare` → **PASSED** (completed 2026-07-11 05:54 UTC).
+- Posted CI status note for reviewers (untagged — held off on tagging a reviewer given the competing stale PR #40360).
+- Result: #40978 fully clean; only universal CE/EE/B2B functional failures remain.
+
+### 🎯 PR #40933 — FIRST APPROVAL
+**[2026-07-13]** **Approved by `ihor-sviziev`** (Magento community engineer) — plain approval, no change requests.
+- New label added: **`Progress: ready for testing`** (moved past code review into Magento's QA/testing stage).
+- This is the first of the 5 PRs to clear review. No contributor action needed; awaiting maintainer QA/merge.
+
+### Review-status sweep (2026-07-14)
+| PR | Label | Review |
+|----|-------|--------|
+| #40918 | pending review, P3 | none — in queue |
+| #40391 | pending review, P2 | none — in queue (ct-prd-pr-scan bot only, benign) |
+| #40392 | pending review, P3 | none — in queue; SVC MINOR awaiting engcom-Charlie JIRA |
+| #40933 | ready for testing, pending review, P2 | **APPROVED (ihor-sviziev)** |
+| #40978 | none yet | none — opened 2026-07-10, bot not yet triaged |
+
+- Note: `ct-prd-pr-scan` comments on #40391/#40392 are an automated security keyword scanner — benign, no action.
+- #40978 still unlabeled after 4 days — watch; consider a gentle nudge if still unlabeled by ~2026-07-18.
+
+---
+
 ## Session 12 — 2026-07-10/11 (New PR #40978; issue claims; chk-doc cleanup)
 
 ### Status sweep — all PRs now triaged (pending review)
